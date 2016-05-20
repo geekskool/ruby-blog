@@ -1,0 +1,48 @@
+<% counter = 0 %>
+<div id="container">
+	<div id="header">
+		<h1><%= link_to "Ruby Blog", posts_path %></h1>
+	</div>
+
+	<div id="main">
+		<div id="content">
+			<div class="post">
+			  <% @posts.reverse.each do |post| %>
+			  	<% if post.category_id.to_i == @category_id.to_i %>
+				<% counter += 1 %>
+				<h2 class="headings"><%= post.title %></h2>
+				
+				<p class="paragraph"><%= post.body[0..150]%>... </p> 			
+				
+				<div class="post-info">
+					<ul>
+						<li class="date"> <%= post.created_at.strftime("%b %d. %Y") %></li>
+						<li class="read-more"> <%= link_to "Read more", post %></a></li>
+					</ul>
+				</div>
+			  <% end %>
+			<% end %>
+			<h3><%= "Sorry, No post in this category :(" if counter == 0 %></h3>
+			</div>
+			
+		</div>
+		
+		<div id="side">
+
+			<h3>Categories</h3>
+
+			<ul id="categories">			
+				<% @categories.each do |category| %>
+  					<li> <%= link_to category.name, category %> </li>
+				<% end %>	
+			</ul>			
+						
+		</div>
+	
+	</div>
+
+	<div id="footer">		
+		<p class="back"><a href="#">Back to top</a></p>
+	</div>
+
+</div>
